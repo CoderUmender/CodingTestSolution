@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTest.BAL", "src\CTest.BLL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTest.DAL", "src\CTest.DAL\CTest.DAL.csproj", "{235C734D-7B76-4ECE-A806-27295F3FE569}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTest.Web.ServerAPI", "src\CTest.Web.ServerAPI\CTest.Web.ServerAPI.csproj", "{7A64D751-0970-4C7F-AFD8-320CBE28D227}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{235C734D-7B76-4ECE-A806-27295F3FE569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{235C734D-7B76-4ECE-A806-27295F3FE569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{235C734D-7B76-4ECE-A806-27295F3FE569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A64D751-0970-4C7F-AFD8-320CBE28D227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A64D751-0970-4C7F-AFD8-320CBE28D227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A64D751-0970-4C7F-AFD8-320CBE28D227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A64D751-0970-4C7F-AFD8-320CBE28D227}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
