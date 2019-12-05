@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CTest.BLL
+namespace CTest.DAL
 {
     public class Class1
     {
