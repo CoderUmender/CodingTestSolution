@@ -6,6 +6,6 @@ namespace CTest.BAL.Domain
     {
         public int Department_Id { get; set; }
         public int Description { get; set; }
-        public virtual Location Location { get; set; }
+        public virtual ICollection<Location > Locations { get; set; }
     }
 }
