@@ -9,8 +9,8 @@ namespace CTest.BAL
     public interface IUnitOfWork : IDisposable
     {
        IDepartmentRepository DepartmentRepository   { get; set; }
-        ICategoryRepository DategoryRepository { get; set; }
-        ISubCategoryRepository DubCategoryRepository { get; set; }
+        ICategoryRepository CategoryRepository { get; set; }
+        ISubCategoryRepository SubCategoryRepository { get; set; }
         int Complete();
     }
 }

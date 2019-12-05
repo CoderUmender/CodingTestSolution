@@ -7,6 +7,6 @@ namespace CTest.BAL.Repositories
 {
     public interface ISubCategoryRepository :IRepository<SubCategory>
     {
-        SubCategory GetSubCategory(int id);
+        SubCategory GetSubCategorybyCategory(int id);
     }
 }
