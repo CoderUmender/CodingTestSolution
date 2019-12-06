@@ -1,11 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CTest.BAL.Domain;
-using CTest.BAL.Repositories;
-using CTest.DAL.Repositories;
-using CTest.DAL;
 
-namespace CTest.Test
+using CodingTest.DAL;
+using CodingTest.BAL.Domain;
+
+namespace CodingTest.Test
 {
     [TestClass]
     public class UnitTest1
@@ -13,7 +12,7 @@ namespace CTest.Test
         [TestMethod]
         public void TestMethod1()
         {
-            using (var unitOfWork = new UnitOfWork(new HierarichyContext("name=HierarichyContext")))
+            using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
             {
                 // Example1
                 // Adding Location via repository..

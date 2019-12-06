@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace CTest.Web.ServerAPI.Areas.HelpPage
+namespace CodingTest.Web.ServerAPI.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

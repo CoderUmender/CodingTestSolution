@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace CTest.Web.ServerAPI
+namespace CodingTest.Web.ServerAPI
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

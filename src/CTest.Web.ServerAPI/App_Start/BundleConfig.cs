@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace CTest.Web.ServerAPI
+namespace CodingTest.Web.ServerAPI
 {
     public class BundleConfig
     {

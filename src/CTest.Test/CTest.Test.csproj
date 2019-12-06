@@ -64,13 +64,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CTest.BLL\CTest.BAL.csproj">
-      <Project>{27fb9489-72fb-408f-9043-0ed563054a99}</Project>
-      <Name>CTest.BAL</Name>
+    <ProjectReference Include="..\..\CodingTest.BAL\CodingTest.BAL.csproj">
+      <Project>{68680c28-46fd-4aaf-9c36-fb0a882f2270}</Project>
+      <Name>CodingTest.BAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CTest.DAL\CTest.DAL.csproj">
-      <Project>{235c734d-7b76-4ece-a806-27295f3fe569}</Project>
-      <Name>CTest.DAL</Name>
+    <ProjectReference Include="..\..\CodingTest.DAL\CodingTest.DAL.csproj">
+      <Project>{d81356bf-7996-4bb0-8bdf-0b7d46df1258}</Project>
+      <Name>CodingTest.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

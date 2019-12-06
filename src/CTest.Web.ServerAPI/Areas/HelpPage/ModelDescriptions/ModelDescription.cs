@@ -1,6 +1,6 @@
 using System;
 
-namespace CTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions
+namespace CodingTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

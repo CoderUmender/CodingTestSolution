@@ -1,10 +1,10 @@
-﻿using CTest.BAL.Domain;
-using CTest.BAL.Repositories;
+﻿using CodingTest.BAL.Domain;
+using CodingTest.BAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CTest.DAL.Repositories
+namespace CodingTest.DAL.Repositories
 {
     public class SubCategoryRepository : Repository<SubCategory>, ISubCategoryRepository
     {

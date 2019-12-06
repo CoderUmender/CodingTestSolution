@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using CTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions;
+using CodingTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions;
 
-namespace CTest.Web.ServerAPI.Areas.HelpPage
+namespace CodingTest.Web.ServerAPI.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

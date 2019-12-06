@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 
-namespace CTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions
+namespace CodingTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Generates model descriptions for given types.

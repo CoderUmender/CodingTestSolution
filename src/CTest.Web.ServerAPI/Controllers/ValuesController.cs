@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace CTest.Web.ServerAPI.Controllers
+namespace CodingTest.Web.ServerAPI.Controllers
 {
     public class ValuesController : ApiController
     {

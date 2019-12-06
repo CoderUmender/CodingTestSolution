@@ -1,16 +1,28 @@
-﻿using System;
+﻿using CodingTest.BAL.Domain;
+using CodingTest.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CTest.Web.ServerAPI.Controllers
+namespace CodingTest.Web.ServerAPI.Controllers
 {
     public class HomeController : Controller
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
+            {
+                // Example1
+                // Adding Location via repository..
+                unitOfWork.LocationRepository.Add(new Location()
+                {
+                    Description = "Hyderabad"
+                });
+                unitOfWork.Complete();
+
+            }
 
             return View();
         }

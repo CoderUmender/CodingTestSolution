@@ -1,18 +1,18 @@
-﻿using CTest.BAL.Domain;
-using CTest.DAL.Configurations;
+﻿using CodingTest.BAL.Domain;
+using CodingTest.DAL.Configurations;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Text;
 
-namespace CTest.DAL
+namespace CodingTest.DAL
 {
   public  class HierarichyContext:DbContext
     {
-        public HierarichyContext(string name)
+        public HierarichyContext():base("HierarichyContext")
         {
-            this.Database.Connection.ConnectionString = "Data Source=.;Initial Catalog=CTest;Integrated Security=True;Pooling=False";
-            this.Configuration.LazyLoadingEnabled = false;
+            //this.Database.Connection.ConnectionString = "Data Source=.;Initial Catalog=CTest;Integrated Security=True;Pooling=False";
+            
 
         }
         public virtual DbSet<Location> Locations { get; set; }

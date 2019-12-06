@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using CTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions;
-using CTest.Web.ServerAPI.Areas.HelpPage.Models;
+using CodingTest.Web.ServerAPI.Areas.HelpPage.ModelDescriptions;
+using CodingTest.Web.ServerAPI.Areas.HelpPage.Models;
 
-namespace CTest.Web.ServerAPI.Areas.HelpPage.Controllers
+namespace CodingTest.Web.ServerAPI.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

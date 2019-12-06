@@ -16,7 +16,7 @@ using System.Web.Http;
 using System.Web.Http.OData;
 #endif
 
-namespace CTest.Web.ServerAPI.Areas.HelpPage
+namespace CodingTest.Web.ServerAPI.Areas.HelpPage
 {
     /// <summary>
     /// Use this class to customize the Help Page.

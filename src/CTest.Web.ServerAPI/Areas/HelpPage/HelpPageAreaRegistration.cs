@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace CTest.Web.ServerAPI.Areas.HelpPage
+namespace CodingTest.Web.ServerAPI.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

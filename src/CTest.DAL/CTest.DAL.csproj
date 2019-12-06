@@ -8,8 +8,4 @@
     <PackageReference Include="EntityFramework" Version="6.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\CTest.BLL\CTest.BAL.csproj" />
-  </ItemGroup>
-
 </Project>
