@@ -7,6 +7,6 @@ namespace CodingTest.BAL.Repositories
 {
    public interface ILocationRepository: IRepository<Location>
     {
-        Location GetLocation();
+        IEnumerable<Location> GetLocation();
     }
 }

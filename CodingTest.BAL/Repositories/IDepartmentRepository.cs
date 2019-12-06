@@ -8,6 +8,6 @@ namespace CodingTest.BAL.Repositories
   public  interface IDepartmentRepository:IRepository<Department>
     {
        
-        Department GetDepartmentsbyLocation(int id);
+        IEnumerable<Department> GetDepartmentsbyLocation(int id);
     }
 }

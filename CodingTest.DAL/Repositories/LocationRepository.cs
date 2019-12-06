@@ -13,9 +13,13 @@ namespace CodingTest.DAL.Repositories
 
         }
 
-        public Location GetLocation()
+        public IEnumerable<Location> GetLocation()
         {
-            throw new NotImplementedException();
+            return HierarichyContext.Locations.Include("Departments");
+        }
+        public HierarichyContext HierarichyContext
+        {
+            get { return Context as HierarichyContext; }
         }
     }
 }

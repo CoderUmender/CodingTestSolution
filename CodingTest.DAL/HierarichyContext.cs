@@ -13,8 +13,8 @@ namespace CodingTest.DAL
         public HierarichyContext():base("name=CodingTestContext")
         {
             // this.Database.Connection.ConnectionString = "Data Source=.;Initial Catalog=CodingTest;Integrated Security=True;Pooling=False";
-           
-
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<Department> Departments  { get; set; }

@@ -13,7 +13,8 @@ namespace CodingTest.DAL.Repositories
         {
 
         }
-        public Department GetDepartmentsbyLocation(int id)
+
+        public IEnumerable<Department> GetDepartmentsbyLocation(int id)
         {
             throw new NotImplementedException();
         }

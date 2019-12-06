@@ -12,11 +12,7 @@ namespace CodingTest.ServerAPI.Controllers
     {
         public ActionResult Index()
         {
-            using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
-            {
-                unitOfWork.LocationRepository.Add(new Location() { Description = "Hjh" });
-                unitOfWork.Complete();
-            }
+            
 
             return View();
         }

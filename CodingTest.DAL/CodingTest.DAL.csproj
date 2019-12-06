@@ -65,6 +65,22 @@
     <Compile Include="Migrations\201912061036181_Rmved DataAnotatin.Designer.cs">
       <DependentUpon>201912061036181_Rmved DataAnotatin.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912061234002_ModifiedData.cs" />
+    <Compile Include="Migrations\201912061234002_ModifiedData.Designer.cs">
+      <DependentUpon>201912061234002_ModifiedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912061235196_f.cs" />
+    <Compile Include="Migrations\201912061235196_f.Designer.cs">
+      <DependentUpon>201912061235196_f.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912061238253_seedda.cs" />
+    <Compile Include="Migrations\201912061238253_seedda.Designer.cs">
+      <DependentUpon>201912061238253_seedda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912061239444_see dpt.cs" />
+    <Compile Include="Migrations\201912061239444_see dpt.Designer.cs">
+      <DependentUpon>201912061239444_see dpt.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
@@ -93,6 +109,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912061036181_Rmved DataAnotatin.resx">
       <DependentUpon>201912061036181_Rmved DataAnotatin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912061234002_ModifiedData.resx">
+      <DependentUpon>201912061234002_ModifiedData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912061235196_f.resx">
+      <DependentUpon>201912061235196_f.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912061238253_seedda.resx">
+      <DependentUpon>201912061238253_seedda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912061239444_see dpt.resx">
+      <DependentUpon>201912061239444_see dpt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

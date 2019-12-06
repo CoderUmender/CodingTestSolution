@@ -1,6 +1,8 @@
 namespace CodingTest.DAL.Migrations
 {
+    using CodingTest.BAL.Domain;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -15,6 +17,10 @@ namespace CodingTest.DAL.Migrations
 
         protected override void Seed(CodingTest.DAL.HierarichyContext context)
         {
+            //context.Departments.Add(new Department  () { Description="s",Location_ID =1 });
+            context.Locations.Add(new Location  () { Description="s" });
+            context.SaveChanges();
+           
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
