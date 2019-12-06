@@ -18,13 +18,15 @@ namespace CTest.DAL
             DepartmentRepository = new DepartmentRepository(context);
             CategoryRepository = new CategoryRepository(context);
             SubCategoryRepository = new SubCategoryRepository(context);
+            LocationRepository = new LocationRepository(context);
 
-         
+
         }
 
-        public IDepartmentRepository DepartmentRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ICategoryRepository CategoryRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public ISubCategoryRepository SubCategoryRepository { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public IDepartmentRepository DepartmentRepository { get; set; }
+        public ICategoryRepository CategoryRepository { get; set; }
+        public ISubCategoryRepository SubCategoryRepository { get; set; }
+        public ILocationRepository LocationRepository { get; set; }
 
         public int Complete()
         {

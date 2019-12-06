@@ -8,6 +8,7 @@ namespace CTest.BAL
 {
     public interface IUnitOfWork : IDisposable
     {
+       ILocationRepository LocationRepository { get; set; }
        IDepartmentRepository DepartmentRepository   { get; set; }
         ICategoryRepository CategoryRepository { get; set; }
         ISubCategoryRepository SubCategoryRepository { get; set; }

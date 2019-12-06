@@ -6,6 +6,7 @@ namespace CTest.BAL.Domain
     {
         public int SubCategory_Id { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<Category> Categoies{ get; set; }
+        public int Category_Id { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

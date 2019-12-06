@@ -6,11 +6,16 @@ using System.Text;
 
 namespace CTest.DAL.Repositories
 {
-  public  class LocationRepository :Repository<Location>
+  public  class LocationRepository :Repository<Location>,ILocationRepository
     {
         public LocationRepository(HierarichyContext context):base(context)
         {
 
+        }
+
+        public Location GetLocation()
+        {
+            throw new NotImplementedException();
         }
     }
 }
