@@ -1,4 +1,6 @@
-﻿using CodingTest.BAL.Domain;
+﻿using CodingTest.BAL;
+using CodingTest.BAL.Domain;
+using CodingTest.BAL.Repositories;
 using CodingTest.BAL.ViewMoels;
 using CodingTest.DAL;
 using System;
@@ -13,18 +15,24 @@ namespace CodingTest.ServerAPI.Controllers
     public class LocationController : ApiController
     {
         // GET: api/Location
-       
-            [Route("api/v1/location/")]
+
+        private IUnitOfWork _unitOfWork;
+       public LocationController()
+        {
+            _unitOfWork = new UnitOfWork(new HierarichyContext());         
+        }
+        public LocationController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        [Route("api/v1/location/")]
         public HttpResponseMessage Get()
         {
             IEnumerable<Location> locations = new List<Location>();
             try
-            {
-              using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
-                {
-                     locations = unitOfWork.LocationRepository.GetLocation().ToList();              
-                    
-                }
+            {          
+                   locations = _unitOfWork.LocationRepository.GetLocation().ToList();                                            
                 return  Request.CreateResponse(HttpStatusCode.OK, locations);
             }
             catch(Exception ex)
@@ -38,12 +46,8 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {  
-                List<DepartmentVM > departments  = new List<DepartmentVM>();
-
-                using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
-                {
-                    departments = unitOfWork.DepartmentRepository.GetDepartmentsbyLocation(location_id).ToList();
-                }
+                List<DepartmentVM > departments  = new List<DepartmentVM>();            
+                departments = _unitOfWork.DepartmentRepository.GetDepartmentsbyLocation(location_id).ToList();               
                 return Request.CreateResponse(HttpStatusCode.OK, departments);
             }
             catch (Exception ex)
@@ -57,10 +61,7 @@ namespace CodingTest.ServerAPI.Controllers
             try
             {
                 List<CategoryVM> categories = new List<CategoryVM>();
-                using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
-                {
-                    categories = unitOfWork.CategoryRepository.GetCategoriesbyLocationANdDepartment(location_id,department_id).ToList();
-                }
+                 categories = _unitOfWork.CategoryRepository.GetCategoriesbyLocationANdDepartment(location_id,department_id).ToList();              
                 return Request.CreateResponse(HttpStatusCode.OK, categories);
             }
             catch (Exception ex)
@@ -73,11 +74,8 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
-                List<SubCategoryVM> subCategories = new List<SubCategoryVM>();
-                using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
-                {
-                    subCategories = unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategoty(location_id, department_id,category_id).ToList();
-                }
+                List<SubCategoryVM> subCategories = new List<SubCategoryVM>();       
+                subCategories = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategoty(location_id, department_id,category_id).ToList();            
                 return Request.CreateResponse(HttpStatusCode.OK, subCategories);
             }
             catch (Exception ex)
@@ -90,11 +88,8 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
-                List<SubCategoryVM> subCategories = new List<SubCategoryVM>();
-                using (var unitOfWork = new UnitOfWork(new HierarichyContext()))
-                {
-                    subCategories = unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategotySubcategory(location_id, department_id, category_id,subcategory_id).ToList();
-                }
+                List<SubCategoryVM> subCategories = new List<SubCategoryVM>();          
+                subCategories = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategotySubcategory(location_id, department_id, category_id,subcategory_id).ToList();            
                 return Request.CreateResponse(HttpStatusCode.OK, subCategories);
             }
             catch (Exception ex)
@@ -103,19 +98,293 @@ namespace CodingTest.ServerAPI.Controllers
             }
         }
 
+
+
+
         // POST: api/Location
-        public void Post([FromBody]string value)
+        [Route("api/v1/location/{description}")]
+        public HttpResponseMessage Post(string description)
         {
+            //Adding Location..
+            try
+            {
+                 Location locationobj = new Location();
+                 locationobj.Description = description;
+                _unitOfWork.LocationRepository.Add(locationobj);
+                _unitOfWork.Complete();
+                return Request.CreateResponse(HttpStatusCode.Created,description);
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
+            }
+
         }
+        //Post: Api/Department  
+        [Route("api/v1/location/{location_id}/department/{description}")]
+        public HttpResponseMessage Post(int location_id,string description)
+        {
+            //Adding Location..
+            try
+            {
+                Department departmentobj = new Department();
+                departmentobj.Description = description;
+                departmentobj.Location_ID = location_id;
+                _unitOfWork.DepartmentRepository.Add(departmentobj);
+                _unitOfWork.Complete();
+                return Request.CreateResponse(HttpStatusCode.Created, description);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
+            }
+
+        }
+        //Post: Api/Category  
+        [Route("api/v1/location/{location_id}/department/{department_id}/category/{description}")]
+        public HttpResponseMessage Post(int location_id, int department_id,string description)
+        {
+            //Adding Category..
+            try
+            {
+                Category categoryObj   = new Category();
+                categoryObj.Description = description;
+                categoryObj.Department_ID = department_id;
+                _unitOfWork.CategoryRepository.Add(categoryObj);
+                _unitOfWork.Complete();
+                return Request.CreateResponse(HttpStatusCode.Created, description);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
+            }
+
+        }
+        //Post: Api/SubCategory  
+        [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/{description}")]
+        public HttpResponseMessage Post(int location_id, int department_id,int Category_id, string description)
+        {
+            //Adding SubCategory..
+            try
+            {
+                SubCategory subcategoryObj = new SubCategory();
+                subcategoryObj.Description = description;
+                subcategoryObj.Category_Id = Category_id;
+                _unitOfWork.SubCategoryRepository.Add(subcategoryObj);
+                _unitOfWork.Complete();
+                return Request.CreateResponse(HttpStatusCode.Created, description);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
+            }
+
+        }
+
+
+
 
         // PUT: api/Location/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        [Route("api/v1/location/{location_id}/{description}")]
+        public HttpResponseMessage Put(int location_id, string description)
         {
+            try
+            {            
+                Location locationobj= _unitOfWork.LocationRepository.Get(location_id);
+                if (locationobj != null)
+                {
+                    locationobj.Description = description;
+                    _unitOfWork.LocationRepository.Update(locationobj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.Created, description);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, description);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
+        }
+        // PUT: api/Department/5
+        [HttpPut]
+        [Route("api/v1/location/{location_id}/department/{department_id}/{description}")]
+        public HttpResponseMessage Put(int location_id,int department_id, string description)
+        {
+            try
+            {
+                Department departmentobj = _unitOfWork.DepartmentRepository.GetDepartmentsbyLocationAndDepartment(location_id,department_id);
+                if (departmentobj != null)
+                {             
+                    departmentobj.Description = description;                   
+                    _unitOfWork.DepartmentRepository.Update(departmentobj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.Created, description);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, description);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
+        }
+        // PUT: api/Category/5
+        [HttpPut]
+        [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/{description}")]
+        public HttpResponseMessage Put(int location_id, int department_id, int Category_id, string description)
+        {
+            try
+            {
+                Category categoryObj = _unitOfWork.CategoryRepository.GetCategoriByLocationDepartmentAndCategory(location_id, department_id,Category_id);
+                if (categoryObj != null)
+                {
+                    categoryObj.Description = description;
+                    _unitOfWork.CategoryRepository.Update(categoryObj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.Created, description);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, description);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
+        }
+        // PUT: api/SubCategory/5
+        [HttpPut]
+        [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/subcategory/{SubCategory_id}/{description}")]
+        public HttpResponseMessage Put(int location_id, int department_id, int Category_id,int  SubCategory_id, string description)
+        {
+            try
+            {
+                SubCategory subcategoryObj = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id,SubCategory_id);
+                if (subcategoryObj != null)
+                {
+                    subcategoryObj.Description = description;
+                    _unitOfWork.SubCategoryRepository.Update(subcategoryObj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.Created, description);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, description);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
         }
 
+
         // DELETE: api/Location/5
-        public void Delete(int id)
+        [Route("api/v1/location/{location_id}")]
+        public HttpResponseMessage Delete(int location_id)
         {
+            try
+            {
+                Location locationobj = _unitOfWork.LocationRepository.Get(location_id);
+                if (locationobj != null)
+                {
+                    _unitOfWork.LocationRepository.Remove(locationobj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.OK, location_id);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, location_id);
+                }              
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
+        }
+
+
+
+        // DELETE: api/Departments/5
+        [Route("api/v1/location/{location_id}/department/{department_id}")]
+        public HttpResponseMessage Delete(int location_id,int department_id)
+        {
+            try
+            {
+                Department departmentobj = _unitOfWork.DepartmentRepository.GetDepartmentsbyLocationAndDepartment(location_id,department_id);
+                if (departmentobj != null)
+                {
+                    _unitOfWork.DepartmentRepository.Remove(departmentobj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.OK, location_id);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, location_id);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
+        }
+
+
+        // DELETE: api/Category/5
+        [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}")]
+        public HttpResponseMessage Delete(int location_id, int department_id,int Category_id)
+        {
+            try
+            {
+                Category categoryobj = _unitOfWork.CategoryRepository.GetCategoriByLocationDepartmentAndCategory(location_id, department_id,Category_id);
+                if (categoryobj != null)
+                {
+                    _unitOfWork.CategoryRepository.Remove(categoryobj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.OK, location_id);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, location_id);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
+        }
+
+
+
+        // DELETE: api/SubCategory/5
+        [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/subcategory/{SubCategory_id}")]
+        public HttpResponseMessage Delete(int location_id, int department_id, int Category_id,int SubCategory_id)
+        {
+            try
+            {
+                SubCategory subCategoryObj = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id,SubCategory_id);
+                if (subCategoryObj != null)
+                {
+                    _unitOfWork.SubCategoryRepository.Remove(subCategoryObj);
+                    _unitOfWork.Complete();
+                    return Request.CreateResponse(HttpStatusCode.OK, location_id);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, location_id);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
+            }
         }
     }
 }

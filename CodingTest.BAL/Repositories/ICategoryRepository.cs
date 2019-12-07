@@ -10,6 +10,6 @@ namespace CodingTest.BAL.Repositories
    public interface ICategoryRepository:IRepository<Category>
     {
         IQueryable<CategoryVM> GetCategoriesbyLocationANdDepartment(int location_id, int department_id);
-       
+        Category GetCategoriByLocationDepartmentAndCategory(int location_id, int department_id, int Category_id);
     }
 }

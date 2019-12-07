@@ -11,6 +11,7 @@ namespace CodingTest.DAL.Configurations
         public CategoryConfigurations()
         {
             HasKey(c => c.Category_Id);
+            
         }
     }
 }

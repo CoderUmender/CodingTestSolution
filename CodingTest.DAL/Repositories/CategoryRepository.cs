@@ -30,6 +30,16 @@ namespace CodingTest.DAL.Repositories
 
             return data;
         }
+
+        public Category GetCategoriByLocationDepartmentAndCategory(int location_id, int department_id, int Category_id)
+        {
+            var data = HierarichyContext.Categories.
+               Where(c => c.Department_ID == department_id && c.Category_Id == Category_id).SingleOrDefault();
+
+
+            return data;
+        }
+
         public HierarichyContext HierarichyContext
         {
             get { return Context as HierarichyContext; }

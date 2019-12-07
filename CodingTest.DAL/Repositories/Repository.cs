@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 namespace CodingTest.DAL.Repositories
@@ -40,6 +41,7 @@ namespace CodingTest.DAL.Repositories
         public void Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
+          
         }
 
         public void AddRange(IEnumerable<TEntity> entities)
@@ -57,6 +59,12 @@ namespace CodingTest.DAL.Repositories
             Context.Set<TEntity>().RemoveRange(entities);
         }
 
-        
+        public void Update(TEntity entity)
+        {
+            //context.Customer.Add(customer);
+            //context.Entry(customer).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            Context.Set<TEntity>().AddOrUpdate(entity);
+          
+        }
     }
 }

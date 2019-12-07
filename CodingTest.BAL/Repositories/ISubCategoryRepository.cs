@@ -11,5 +11,6 @@ namespace CodingTest.BAL.Repositories
     {
         IQueryable<SubCategoryVM> GetSubCategorybyLocationDepartmentAndCategoty(int location_id, int department_id, int Category_id);
         IQueryable<SubCategoryVM> GetSubCategorybyLocationDepartmentAndCategotySubcategory(int location_id, int department_id, int Category_id, int SubCategory_id);
+        SubCategory GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(int location_id, int department_id, int Category_id, int SubCategory_id);
     }
 }

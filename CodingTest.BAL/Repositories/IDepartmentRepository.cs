@@ -11,5 +11,7 @@ namespace CodingTest.BAL.Repositories
     {
        
         IQueryable<DepartmentVM> GetDepartmentsbyLocation(int id);
+        Department GetDepartmentsbyLocationAndDepartment(int Locationid,int departmentid);
+
     }
 }
