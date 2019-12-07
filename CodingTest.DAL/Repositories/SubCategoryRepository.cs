@@ -50,17 +50,17 @@ namespace CodingTest.DAL.Repositories
             return data;
         }
 
-        public SubCategory GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(int location_id, int department_id, int Category_id, int SubCategory_id)
+        public IQueryable<SubCategory> GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(int location_id, int department_id, int Category_id, int SubCategory_id)
         {
 
             var data = from loc in HierarichyContext.Locations.Where(c => c.Location_Id == location_id)
                        join dept in HierarichyContext.Departments.Where(c => c.Department_Id == department_id) on loc.Location_Id equals dept.Location_ID
                        join cat in HierarichyContext.Categories.Where(c => c.Category_Id == Category_id) on dept.Department_Id equals cat.Department_ID
                        join subcat in HierarichyContext.SubCategories.Where(c => c.SubCategory_Id == SubCategory_id) on cat.Category_Id equals subcat.Category_Id
-                       select new SubCategory();
-                       
+                       select subcat;
 
-            return data.SingleOrDefault();
+            
+            return data;
         }
 
         public HierarichyContext HierarichyContext

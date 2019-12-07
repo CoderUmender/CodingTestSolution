@@ -161,7 +161,7 @@ namespace CodingTest.ServerAPI.Controllers
 
         }
         //Post: Api/SubCategory  
-        [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/{description}")]
+        [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/SubCategory/{description}")]
         public HttpResponseMessage Post(int location_id, int department_id,int Category_id, string description)
         {
             //Adding SubCategory..
@@ -266,7 +266,11 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
-                SubCategory subcategoryObj = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id,SubCategory_id);
+                var subcategoryObj = _unitOfWork.SubCategoryRepository
+                    .GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id, SubCategory_id)
+                   .AsEnumerable().FirstOrDefault();
+                                          
+                  
                 if (subcategoryObj != null)
                 {
                     subcategoryObj.Description = description;
@@ -309,9 +313,6 @@ namespace CodingTest.ServerAPI.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
-
-
-
         // DELETE: api/Departments/5
         [Route("api/v1/location/{location_id}/department/{department_id}")]
         public HttpResponseMessage Delete(int location_id,int department_id)
@@ -335,8 +336,6 @@ namespace CodingTest.ServerAPI.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
-
-
         // DELETE: api/Category/5
         [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}")]
         public HttpResponseMessage Delete(int location_id, int department_id,int Category_id)
@@ -360,16 +359,15 @@ namespace CodingTest.ServerAPI.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
-
-
-
         // DELETE: api/SubCategory/5
         [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/subcategory/{SubCategory_id}")]
         public HttpResponseMessage Delete(int location_id, int department_id, int Category_id,int SubCategory_id)
         {
             try
             {
-                SubCategory subCategoryObj = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id,SubCategory_id);
+                var subCategoryObj = _unitOfWork.SubCategoryRepository
+                    .GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id, SubCategory_id)
+                    .AsEnumerable().FirstOrDefault();
                 if (subCategoryObj != null)
                 {
                     _unitOfWork.SubCategoryRepository.Remove(subCategoryObj);
