@@ -81,6 +81,22 @@
     <Compile Include="Migrations\201912061239444_see dpt.Designer.cs">
       <DependentUpon>201912061239444_see dpt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912070606270_List.cs" />
+    <Compile Include="Migrations\201912070606270_List.Designer.cs">
+      <DependentUpon>201912070606270_List.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912070616355_Removed Department in Location.cs" />
+    <Compile Include="Migrations\201912070616355_Removed Department in Location.Designer.cs">
+      <DependentUpon>201912070616355_Removed Department in Location.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912070625504_removed collections .cs" />
+    <Compile Include="Migrations\201912070625504_removed collections .Designer.cs">
+      <DependentUpon>201912070625504_removed collections .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912070630241_added seeddata.cs" />
+    <Compile Include="Migrations\201912070630241_added seeddata.Designer.cs">
+      <DependentUpon>201912070630241_added seeddata.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
@@ -121,6 +137,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201912061239444_see dpt.resx">
       <DependentUpon>201912061239444_see dpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912070606270_List.resx">
+      <DependentUpon>201912070606270_List.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912070616355_Removed Department in Location.resx">
+      <DependentUpon>201912070616355_Removed Department in Location.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912070625504_removed collections .resx">
+      <DependentUpon>201912070625504_removed collections .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912070630241_added seeddata.resx">
+      <DependentUpon>201912070630241_added seeddata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

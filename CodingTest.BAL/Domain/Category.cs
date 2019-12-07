@@ -8,6 +8,6 @@ namespace CodingTest.BAL.Domain
         public string Description { get; set; }
         public virtual Department Department  { get; set; }
         public int Department_ID { get; set; }
-        public virtual ICollection<SubCategory> SubCategories { get; set; }
+        //public virtual List<SubCategory> SubCategories { get; set; }
     }
 }

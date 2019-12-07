@@ -60,6 +60,9 @@
     <Compile Include="Repositories\ILocationRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\ISubCategoryRepository.cs" />
+    <Compile Include="ViewMoels\CategoryVM.cs" />
+    <Compile Include="ViewMoels\DepartmentVM.cs" />
+    <Compile Include="ViewMoels\SubCategoryVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

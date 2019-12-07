@@ -2,6 +2,7 @@
 using CodingTest.BAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CodingTest.DAL.Repositories
@@ -13,9 +14,9 @@ namespace CodingTest.DAL.Repositories
 
         }
 
-        public IEnumerable<Location> GetLocation()
+        public IQueryable<Location> GetLocation()
         {
-            return HierarichyContext.Locations.Include("Departments");
+            return HierarichyContext.Locations;
         }
         public HierarichyContext HierarichyContext
         {

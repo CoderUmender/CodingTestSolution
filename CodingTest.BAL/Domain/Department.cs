@@ -11,6 +11,6 @@ namespace CodingTest.BAL.Domain
    
         public virtual Location Location { get; set; }
         public int Location_ID { get; set; }
-        public virtual ICollection<Category> Categories { get; set; }
+        //public virtual List<Category> Categories { get; set; }
     }
 }

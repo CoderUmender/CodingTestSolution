@@ -1,7 +1,9 @@
 ﻿using CodingTest.BAL.Domain;
 using CodingTest.BAL.Repositories;
+using CodingTest.BAL.ViewMoels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CodingTest.DAL.Repositories
@@ -13,9 +15,26 @@ namespace CodingTest.DAL.Repositories
 
         }
 
-        public Category GetCategorybyDepartments(int Id)
+        public IQueryable<CategoryVM> GetCategoriesbyLocationANdDepartment(int location_id, int department_id)
         {
-            throw new NotImplementedException();
+            var data = from dept in HierarichyContext.Departments.Where(c=>c.Department_Id==department_id)
+                       join loc in HierarichyContext.Locations.Where(c=>c.Location_Id==location_id) on dept.Location_ID equals loc.Location_Id
+                       join cat in HierarichyContext.Categories on  dept.Department_Id equals cat.Department_ID
+                       select new CategoryVM()
+                       {
+                           CategoryID  = cat.Category_Id,
+                           CategoryName = cat .Description,
+                           DepartmentName=dept.Description,
+                           LocationName = loc.Description
+                       };
+
+            return data;
         }
+        public HierarichyContext HierarichyContext
+        {
+            get { return Context as HierarichyContext; }
+        }
+
+
     }
 }

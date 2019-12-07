@@ -12,6 +12,6 @@ namespace CodingTest.BAL.Domain
         public string Description { get; set; }
        
        
-        public virtual ICollection<Department> Departments  { get; set; }
+      //  public virtual List<Department> Departments  { get; set; }
     }
 }

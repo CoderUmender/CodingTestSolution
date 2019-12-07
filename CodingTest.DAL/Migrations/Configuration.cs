@@ -17,8 +17,10 @@ namespace CodingTest.DAL.Migrations
 
         protected override void Seed(CodingTest.DAL.HierarichyContext context)
         {
-            //context.Departments.Add(new Department  () { Description="s",Location_ID =1 });
-            context.Locations.Add(new Location  () { Description="s" });
+          // context.Departments.Add(new Department  () { Description= "Bakery", Location_ID =3 });
+           // context.Locations.Add(new Location  () { Description= "Perimeter" });
+            // context.Categories.Add(new Category() { Description= "Bakery Bread", Department_ID=1});
+            context.SubCategories.Add(new SubCategory() { Description = "Bagels", Category_Id = 1 });
             context.SaveChanges();
            
             //  This method will be called after migrating to the latest version.
