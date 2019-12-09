@@ -122,18 +122,18 @@ namespace CodingTest.ServerAPI.Controllers
 
         }
         //Post: Api/Department  
-        [Route("api/v1/location/{location_id}/department/{description}")]
-        public HttpResponseMessage Post(int location_id,string description)
+        [Route("api/v1/department/")]
+        public HttpResponseMessage Post(Department department)
         {
             //Adding Location..
             try
             {
                 Department departmentobj = new Department();
-                departmentobj.Description = description;
-                departmentobj.Location_ID = location_id;
+                departmentobj.Description = department.Description;
+                departmentobj.Location_ID = department.Location_ID;
                 _unitOfWork.DepartmentRepository.Add(departmentobj);
                 _unitOfWork.Complete();
-                return Request.CreateResponse(HttpStatusCode.Created, description);
+                return Request.CreateResponse(HttpStatusCode.Created, department.Description);
             }
             catch (Exception ex)
             {
@@ -212,22 +212,22 @@ namespace CodingTest.ServerAPI.Controllers
         }
         // PUT: api/Department/5
         [HttpPut]
-        [Route("api/v1/location/{location_id}/department/{department_id}/{description}")]
-        public HttpResponseMessage Put(int location_id,int department_id, string description)
+        [Route("api/v1/department/")]
+        public HttpResponseMessage Put(Department department)
         {
             try
             {
-                Department departmentobj = _unitOfWork.DepartmentRepository.GetDepartmentsbyLocationAndDepartment(location_id,department_id);
+                Department departmentobj = _unitOfWork.DepartmentRepository.GetDepartmentsbyLocationAndDepartment(department.Location_ID,department.Department_Id);
                 if (departmentobj != null)
                 {             
-                    departmentobj.Description = description;                   
+                    departmentobj.Description = department.Description;                   
                     _unitOfWork.DepartmentRepository.Update(departmentobj);
                     _unitOfWork.Complete();
-                    return Request.CreateResponse(HttpStatusCode.Created, description);
+                    return Request.CreateResponse(HttpStatusCode.Created, department.Description);
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, description);
+                    return Request.CreateResponse(HttpStatusCode.NotFound, department);
                 }
             }
             catch (Exception ex)
