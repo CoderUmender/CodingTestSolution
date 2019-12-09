@@ -15,12 +15,17 @@ namespace CodingTest.ServerAPI
 
             // Web API routes
 
-            var cors = new EnableCorsAttribute("*", "*", "*");//origins,headers,methods   
-            config.EnableCors(cors);
+         
+            //config.EnableCors();
 
             config.MapHttpAttributeRoutes();
             // registering custome TokenValidation Hanleder..
             config.MessageHandlers.Add(new TokenValidationHandler());
+            config.EnableCors();
+            // Web API configuration and services
+            // Configure Web API to use only bearer token authentication.
+           // config.SuppressDefaultHostAuthentication();
+            //config.Filters.Add(new HostAuthenticationFilter(.AuthenticationType));
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
