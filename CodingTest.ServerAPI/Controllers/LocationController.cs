@@ -102,17 +102,18 @@ namespace CodingTest.ServerAPI.Controllers
 
 
         // POST: api/Location
-        [Route("api/v1/location/{description}")]
-        public HttpResponseMessage Post(string description)
+
+        [Route("api/v1/location/")]
+        public HttpResponseMessage Post(Location description)
         {
             //Adding Location..
             try
             {
                  Location locationobj = new Location();
-                 locationobj.Description = description;
+                locationobj.Description = description.Description;
                 _unitOfWork.LocationRepository.Add(locationobj);
                 _unitOfWork.Complete();
-                return Request.CreateResponse(HttpStatusCode.Created,description);
+                return Request.CreateResponse(HttpStatusCode.Created, description);
             }
             catch(Exception ex)
             {
@@ -186,15 +187,15 @@ namespace CodingTest.ServerAPI.Controllers
 
         // PUT: api/Location/5
         [HttpPut]
-        [Route("api/v1/location/{location_id}/{description}")]
-        public HttpResponseMessage Put(int location_id, string description)
+        [Route("api/v1/location/")]
+        public HttpResponseMessage Put(Location description)
         {
             try
             {            
-                Location locationobj= _unitOfWork.LocationRepository.Get(location_id);
+                Location locationobj= _unitOfWork.LocationRepository.Get(description.Location_Id);
                 if (locationobj != null)
                 {
-                    locationobj.Description = description;
+                    locationobj.Description = description.Description;
                     _unitOfWork.LocationRepository.Update(locationobj);
                     _unitOfWork.Complete();
                     return Request.CreateResponse(HttpStatusCode.Created, description);
@@ -291,21 +292,21 @@ namespace CodingTest.ServerAPI.Controllers
 
 
         // DELETE: api/Location/5
-        [Route("api/v1/location/{location_id}")]
-        public HttpResponseMessage Delete(int location_id)
+        [Route("api/v1/location/")]
+        public HttpResponseMessage Delete(int id)
         {
             try
             {
-                Location locationobj = _unitOfWork.LocationRepository.Get(location_id);
+                Location locationobj = _unitOfWork.LocationRepository.Get(id);
                 if (locationobj != null)
                 {
                     _unitOfWork.LocationRepository.Remove(locationobj);
                     _unitOfWork.Complete();
-                    return Request.CreateResponse(HttpStatusCode.OK, location_id);
+                    return Request.CreateResponse(HttpStatusCode.OK, id);
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, location_id);
+                    return Request.CreateResponse(HttpStatusCode.NotFound, id);
                 }              
             }
             catch (Exception ex)
