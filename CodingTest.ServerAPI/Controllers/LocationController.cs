@@ -15,7 +15,7 @@ namespace CodingTest.ServerAPI.Controllers
     public class LocationController : ApiController
     {
         // GET: api/Location
-
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         private IUnitOfWork _unitOfWork;
        public LocationController()
         {
@@ -31,12 +31,15 @@ namespace CodingTest.ServerAPI.Controllers
         {
             IEnumerable<Location> locations = new List<Location>();
             try
-            {          
-                   locations = _unitOfWork.LocationRepository.GetLocation().ToList();                                            
+            {
+                log.Error($"Location Get excution started" + DateTime.Now);
+                locations = _unitOfWork.LocationRepository.GetLocation().ToList();                                            
                 return  Request.CreateResponse(HttpStatusCode.OK, locations);
+               
             }
             catch(Exception ex)
             {
+                log.Error($"Location Get Error" + ex);
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found");
             }  
         }
@@ -45,13 +48,15 @@ namespace CodingTest.ServerAPI.Controllers
         public HttpResponseMessage Get(int location_id)
         {
             try
-            {  
+            {
+                log.Error($"Department Get excution started" + DateTime.Now);
                 List<DepartmentVM > departments  = new List<DepartmentVM>();            
                 departments = _unitOfWork.DepartmentRepository.GetDepartmentsbyLocation(location_id).ToList();               
                 return Request.CreateResponse(HttpStatusCode.OK, departments);
             }
             catch (Exception ex)
             {
+                log.Error($"Department Get Error" +ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "ErrorOccured! Please Contact admin");
             }
         }
@@ -60,12 +65,14 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"Category Get excution started" + DateTime.Now);
                 List<CategoryVM> categories = new List<CategoryVM>();
                  categories = _unitOfWork.CategoryRepository.GetCategoriesbyLocationANdDepartment(location_id,department_id).ToList();              
                 return Request.CreateResponse(HttpStatusCode.OK, categories);
             }
             catch (Exception ex)
             {
+                log.Error($"Category Get Error" + ex);
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found");
             }
         }
@@ -74,12 +81,14 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"SubCategory Get excution started" + DateTime.Now);
                 List<SubCategoryVM> subCategories = new List<SubCategoryVM>();       
                 subCategories = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategoty(location_id, department_id,category_id).ToList();            
                 return Request.CreateResponse(HttpStatusCode.OK, subCategories);
             }
             catch (Exception ex)
             {
+                log.Error($"SubCategory Error" + ex);
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found");
             }
         }
@@ -88,12 +97,14 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"SubCategory by subcategory Get excution started" + DateTime.Now);
                 List<SubCategoryVM> subCategories = new List<SubCategoryVM>();          
                 subCategories = _unitOfWork.SubCategoryRepository.GetSubCategorybyLocationDepartmentAndCategotySubcategory(location_id, department_id, category_id,subcategory_id).ToList();            
                 return Request.CreateResponse(HttpStatusCode.OK, subCategories);
             }
             catch (Exception ex)
             {
+                log.Error($"SubCategory Error" + ex);
                 return Request.CreateResponse(HttpStatusCode.NotFound, "No data found");
             }
         }
@@ -109,7 +120,8 @@ namespace CodingTest.ServerAPI.Controllers
             //Adding Location..
             try
             {
-                 Location locationobj = new Location();
+                log.Error($"Location Post Execution started" + DateTime.Now);
+                Location locationobj = new Location();
                 locationobj.Description = description.Description;
                 _unitOfWork.LocationRepository.Add(locationobj);
                 _unitOfWork.Complete();
@@ -117,6 +129,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch(Exception ex)
             {
+                log.Error($"Location PostError" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
             }
 
@@ -128,6 +141,7 @@ namespace CodingTest.ServerAPI.Controllers
             //Adding Location..
             try
             {
+                log.Error($"Department Post Execution started" + DateTime.Now);
                 Department departmentobj = new Department();
                 departmentobj.Description = department.Description;
                 departmentobj.Location_ID = department.Location_ID;
@@ -137,6 +151,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"Dept Post Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
             }
 
@@ -148,6 +163,7 @@ namespace CodingTest.ServerAPI.Controllers
             //Adding Category..
             try
             {
+                log.Error($"Category Post Execution started" + DateTime.Now);
                 Category categoryObj   = new Category();
                 categoryObj.Description = category.Description;
                 categoryObj.Department_ID =category.Department_ID;
@@ -157,6 +173,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"Category Post Execution Error" +ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
             }
 
@@ -168,6 +185,7 @@ namespace CodingTest.ServerAPI.Controllers
             //Adding SubCategory..
             try
             {
+                log.Error($"SubCategory Post Execution started" + DateTime.Now);
                 SubCategory subcategoryObj = new SubCategory();
                 subcategoryObj.Description = subCategory.Description;
                 subcategoryObj.Category_Id = subCategory.Category_Id;
@@ -177,6 +195,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"SUbCategory Post Execution Error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while adding record");
             }
 
@@ -191,7 +210,8 @@ namespace CodingTest.ServerAPI.Controllers
         public HttpResponseMessage Put(Location description)
         {
             try
-            {            
+            {
+                log.Error($"Location Put Execution started" + DateTime.Now);
                 Location locationobj= _unitOfWork.LocationRepository.Get(description.Location_Id);
                 if (locationobj != null)
                 {
@@ -202,11 +222,13 @@ namespace CodingTest.ServerAPI.Controllers
                 }
                 else
                 {
+                  
                     return Request.CreateResponse(HttpStatusCode.NotFound, description);
                 }
             }
             catch (Exception ex)
             {
+                log.Error($"Location Put Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
@@ -242,6 +264,7 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"Category Put Execution started" + DateTime.Now);
                 Category categoryObj = _unitOfWork.CategoryRepository.GetCategoriByLocationDepartmentAndCategory(categoryId, category.Department_ID,category.Category_Id);
                 if (categoryObj != null)
                 {
@@ -252,11 +275,13 @@ namespace CodingTest.ServerAPI.Controllers
                 }
                 else
                 {
+                  
                     return Request.CreateResponse(HttpStatusCode.NotFound, category);
                 }
             }
             catch (Exception ex)
             {
+                log.Error($"Category Put Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
@@ -267,6 +292,7 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"SubCategory Put Execution Started" + DateTime.Now);
                 var subcategoryObj = _unitOfWork.SubCategoryRepository
                     .GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(locationid, departmentid, category.Category_Id, category.SubCategory_Id)
                    .AsEnumerable().FirstOrDefault();
@@ -286,6 +312,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"SubCategory Put Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
@@ -297,6 +324,7 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"Location Delete Execution Started" + DateTime.Now);
                 Location locationobj = _unitOfWork.LocationRepository.Get(id);
                 if (locationobj != null)
                 {
@@ -311,6 +339,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"Location Delete Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
@@ -320,6 +349,7 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"Depatment Delete Execution Started" + DateTime.Now);
                 Department departmentobj = _unitOfWork.DepartmentRepository.GetDepartmentsbyLocationAndDepartment(location_id,department_id);
                 if (departmentobj != null)
                 {
@@ -334,6 +364,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"Department Delete Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
@@ -343,6 +374,7 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"Category Delete Execution Started" + DateTime.Now);
                 Category categoryobj = _unitOfWork.CategoryRepository.GetCategoriByLocationDepartmentAndCategory(location_id, department_id,Category_id);
                 if (categoryobj != null)
                 {
@@ -357,6 +389,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"Category Delete Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
@@ -366,6 +399,7 @@ namespace CodingTest.ServerAPI.Controllers
         {
             try
             {
+                log.Error($"SubCategory Delete Execution Started" + DateTime.Now);
                 var subCategoryObj = _unitOfWork.SubCategoryRepository
                     .GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id, SubCategory_id)
                     .AsEnumerable().FirstOrDefault();
@@ -382,6 +416,7 @@ namespace CodingTest.ServerAPI.Controllers
             }
             catch (Exception ex)
             {
+                log.Error($"Subcategory Delete Execution error" + ex);
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
