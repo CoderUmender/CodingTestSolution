@@ -279,5 +279,18 @@ namespace Codingtest.Test
             Assert.AreEqual(expected, actul);
             Assert.AreEqual(HttpStatusCode.NotFound, _httpResponseMessage.StatusCode);
         }
+
+        [TestMethod]
+        public void SkuMetaDataGetTest()
+        {
+            //api / v1 / location /{ location_id}/ department /
+            SkumetaData sub = new SkumetaData();
+
+            _httpResponseMessage = _locationController.Get(sub);
+            var actul = _httpResponseMessage.IsSuccessStatusCode;
+            var expected = true;
+            Assert.AreEqual(expected, actul);
+            Assert.AreEqual(HttpStatusCode.OK, _httpResponseMessage.StatusCode);
+        }
     }
 }
