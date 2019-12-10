@@ -420,5 +420,33 @@ namespace CodingTest.ServerAPI.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
+        [Route("api/v1/SkuMetaData/")]
+        public HttpResponseMessage Get(SkumetaData skumetaData)
+        {
+            try
+            {
+                log.Error($"Sku Meta Data get Execution Started" + DateTime.Now);
+                var skuobject = _unitOfWork.SubCategoryRepository
+                    .GetSKUmetaData(skumetaData)
+                    .AsEnumerable().Select((data,index)=>new SkumetaData()
+                    {
+                        SKUID="SKU"+index,
+                        Location=data.Location,
+                        Category=data.Category,
+                        Department=data.Department,
+                        SubCategory=data.SubCategory
+
+                    }).ToList();
+               
+               
+                    return Request.CreateResponse(HttpStatusCode.OK, skuobject);
+               
+            }
+            catch (Exception ex)
+            {
+                log.Error($"Sku Meta Data get  Execution error" + ex);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Getting record");
+            }
+        }
     }
 }

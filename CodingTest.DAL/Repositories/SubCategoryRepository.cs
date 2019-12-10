@@ -63,6 +63,26 @@ namespace CodingTest.DAL.Repositories
             return data;
         }
 
+        public IQueryable<SkumetaData> GetSKUmetaData(SkumetaData skumetaData)
+        {
+            var data = from loc in HierarichyContext.Locations.Where(c => c.Description == skumetaData.Location)
+                       join dept in HierarichyContext.Departments.Where(c => c.Description == skumetaData.Department) on loc.Location_Id equals dept.Location_ID
+                       join cat in HierarichyContext.Categories.Where(c => c.Description == skumetaData.Category) on dept.Department_Id equals cat.Department_ID
+                       join subcat in HierarichyContext.SubCategories.Where(c => c.Description == skumetaData.SubCategory) on cat.Category_Id equals subcat.Category_Id
+                       select new SkumetaData()
+                       {
+                          
+                        
+                          Location =loc.Description,
+                          Department=dept.Description,
+                          Category=cat.Description,
+                          SubCategory=subcat.Description
+                       };
+
+
+            return data;
+        }
+
         public HierarichyContext HierarichyContext
         {
             get { return Context as HierarichyContext; }

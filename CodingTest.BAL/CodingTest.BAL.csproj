@@ -52,6 +52,7 @@
     <Compile Include="Domain\Category.cs" />
     <Compile Include="Domain\Department.cs" />
     <Compile Include="Domain\Location.cs" />
+    <Compile Include="Domain\SkumetaData.cs" />
     <Compile Include="Domain\SubCategory.cs" />
     <Compile Include="Domain\user.cs" />
     <Compile Include="IUnitOfWork.cs" />
