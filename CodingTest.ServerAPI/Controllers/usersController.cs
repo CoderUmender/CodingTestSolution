@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Routing;
 
 namespace CodingTest.ServerAPI.Controllers
 {
@@ -15,7 +16,8 @@ namespace CodingTest.ServerAPI.Controllers
     public class usersController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Authenticate( string username,string password)
+        [Route("api/v1/user/")]
+        public HttpResponseMessage Post(user user)
         {
           
 
@@ -24,13 +26,13 @@ namespace CodingTest.ServerAPI.Controllers
             bool isUsernamePasswordValid = false;
 
            
-                isUsernamePasswordValid = password == "admin" ? true : false;
+                isUsernamePasswordValid = user.password == "admin" ? true : false;
             // if credentials are valid
             if (isUsernamePasswordValid)
             {
-                string token = createToken(username);
+                string token = createToken(user.username);
                 //return the token
-                return Ok<string>(token);
+                responseMsg= Request.CreateResponse(HttpStatusCode.OK, token);
             }
             else
             {
@@ -38,8 +40,9 @@ namespace CodingTest.ServerAPI.Controllers
                 HttpResponseMessage responseMessage = new HttpResponseMessage();
                 responseMessage.StatusCode = HttpStatusCode.Unauthorized;
                 response = ResponseMessage(responseMessage);
-                return response;
+                responseMsg= responseMessage;
             }
+            return responseMsg;
         }
 
         private string createToken(string username)
