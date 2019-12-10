@@ -143,17 +143,17 @@ namespace CodingTest.ServerAPI.Controllers
         }
         //Post: Api/Category  
         [Route("api/v1/location/{location_id}/department/{department_id}/category/{description}")]
-        public HttpResponseMessage Post(int location_id, int department_id,string description)
+        public HttpResponseMessage Post(Category category)
         {
             //Adding Category..
             try
             {
                 Category categoryObj   = new Category();
-                categoryObj.Description = description;
-                categoryObj.Department_ID = department_id;
+                categoryObj.Description = category.Description;
+                categoryObj.Department_ID =category.Department_ID;
                 _unitOfWork.CategoryRepository.Add(categoryObj);
                 _unitOfWork.Complete();
-                return Request.CreateResponse(HttpStatusCode.Created, description);
+                return Request.CreateResponse(HttpStatusCode.Created, category);
             }
             catch (Exception ex)
             {
@@ -163,17 +163,17 @@ namespace CodingTest.ServerAPI.Controllers
         }
         //Post: Api/SubCategory  
         [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/SubCategory/{description}")]
-        public HttpResponseMessage Post(int location_id, int department_id,int Category_id, string description)
+        public HttpResponseMessage Post(SubCategory subCategory)
         {
             //Adding SubCategory..
             try
             {
                 SubCategory subcategoryObj = new SubCategory();
-                subcategoryObj.Description = description;
-                subcategoryObj.Category_Id = Category_id;
+                subcategoryObj.Description = subCategory.Description;
+                subcategoryObj.Category_Id = subCategory.Category_Id;
                 _unitOfWork.SubCategoryRepository.Add(subcategoryObj);
                 _unitOfWork.Complete();
-                return Request.CreateResponse(HttpStatusCode.Created, description);
+                return Request.CreateResponse(HttpStatusCode.Created, subCategory);
             }
             catch (Exception ex)
             {
@@ -238,21 +238,21 @@ namespace CodingTest.ServerAPI.Controllers
         // PUT: api/Category/5
         [HttpPut]
         [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/{description}")]
-        public HttpResponseMessage Put(int location_id, int department_id, int Category_id, string description)
+        public HttpResponseMessage Put(Category category,int categoryId)
         {
             try
             {
-                Category categoryObj = _unitOfWork.CategoryRepository.GetCategoriByLocationDepartmentAndCategory(location_id, department_id,Category_id);
+                Category categoryObj = _unitOfWork.CategoryRepository.GetCategoriByLocationDepartmentAndCategory(categoryId, category.Department_ID,category.Category_Id);
                 if (categoryObj != null)
                 {
-                    categoryObj.Description = description;
+                    categoryObj.Description = category.Description;
                     _unitOfWork.CategoryRepository.Update(categoryObj);
                     _unitOfWork.Complete();
-                    return Request.CreateResponse(HttpStatusCode.Created, description);
+                    return Request.CreateResponse(HttpStatusCode.Created, category);
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, description);
+                    return Request.CreateResponse(HttpStatusCode.NotFound, category);
                 }
             }
             catch (Exception ex)
@@ -263,25 +263,25 @@ namespace CodingTest.ServerAPI.Controllers
         // PUT: api/SubCategory/5
         [HttpPut]
         [Route("api/v1/location/{location_id}/department/{department_id}/category/{Category_id}/subcategory/{SubCategory_id}/{description}")]
-        public HttpResponseMessage Put(int location_id, int department_id, int Category_id,int  SubCategory_id, string description)
+        public HttpResponseMessage Put(SubCategory category,int locationid,int departmentid)
         {
             try
             {
                 var subcategoryObj = _unitOfWork.SubCategoryRepository
-                    .GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(location_id, department_id, Category_id, SubCategory_id)
+                    .GetSubCategorybyLocationDepartmentAndCategotySubcategoryID(locationid, departmentid, category.Category_Id, category.SubCategory_Id)
                    .AsEnumerable().FirstOrDefault();
                                           
                   
                 if (subcategoryObj != null)
                 {
-                    subcategoryObj.Description = description;
+                    subcategoryObj.Description = category.Description;
                     _unitOfWork.SubCategoryRepository.Update(subcategoryObj);
                     _unitOfWork.Complete();
-                    return Request.CreateResponse(HttpStatusCode.Created, description);
+                    return Request.CreateResponse(HttpStatusCode.Created, category);
                 }
                 else
                 {
-                    return Request.CreateResponse(HttpStatusCode.NotFound, description);
+                    return Request.CreateResponse(HttpStatusCode.NotFound, category);
                 }
             }
             catch (Exception ex)
