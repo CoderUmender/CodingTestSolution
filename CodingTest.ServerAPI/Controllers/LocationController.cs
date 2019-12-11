@@ -420,7 +420,7 @@ namespace CodingTest.ServerAPI.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Error Occured while Updating record");
             }
         }
-        [Route("api/v1/SkuMetaData/")]
+        [Route("api/v1/SkuMetaData/{skumetaData}")]
         public HttpResponseMessage Get(SkumetaData skumetaData)
         {
             try
